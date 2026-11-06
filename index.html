@@ -19,292 +19,45 @@
   <div class="actions">
     <button id="check-toggle" type="button" title="Toon of verberg de controlepunten">Verberg checks</button>
     <button id="theme-toggle" type="button" title="Licht of donker">Donker</button>
-    <button id="export-docx" type="button" class="primary">Exporteer naar Word</button>
+    <button id="download-page" type="button" title="1 HTML-bestand om in te dienen, zonder checks">Download webpagina</button>
+    <a class="button primary" href="content/syllabus.docx" download="syllabus-sociaal-beleid-ruben-mergaert.docx">Download Word</a>
   </div>
 </header>
 
 <div class="layout">
 <aside class="toc">
   <p class="toc-title">Inhoud</p>
-  <ol>
-    <li><a href="#titel">Titelblad</a></li>
-    <li><a href="#h1">1 Beleidsdomein</a></li>
-    <li><a href="#h2">2 Beleidsniveaus</a></li>
-    <li><a href="#h3">3 Micro, meso, macro</a></li>
-    <li><a href="#h4">4 Plaats van sociaal werk</a></li>
-    <li><a href="#h5">5 Kritische reflectie</a></li>
-    <li><a href="#bronnen">Bronnen en AI</a></li>
-  </ol>
-  <p class="toc-hint">De gele <span class="check-dot"></span> checks zijn standpunten en punten die Ruben zelf nakijkt. Ze komen niet mee in de Word-export.</p>
+  <ol id="toc-list"></ol>
+  <p class="toc-hint">De gele <span class="check-dot"></span> checks zijn punten die Ruben nog nakijkt. Verwijder ze in Word voor je indient.</p>
 </aside>
 
-<main id="syllabus" data-docx-name="syllabus-sociaal-beleid-ruben-mergaert.docx">
-
-<section id="titel" class="hero">
-  <p class="kicker">Persoonlijke syllabus sociaal beleid</p>
-  <h1>Dak- en thuisloosheid: wonen en preventie van uithuiszetting</h1>
-  <table class="meta">
-    <tbody>
-      <tr><td>Naam en voornaam</td><td>Mergaert Ruben</td></tr>
-      <tr><td>Opleiding</td><td>Bachelor sociaal werk</td></tr>
-      <tr><td>Opleidingsonderdeel</td><td>Sociaal beleid</td></tr>
-      <tr><td>Lectoren</td><td>Ward Dumoulin en Wouter Vandemaele</td></tr>
-      <tr><td>Academiejaar</td><td>2026-2027</td></tr>
-      <tr><td>Beleidsdomein</td><td>Dak- en thuisloosheid, met focus op wonen en preventie van uithuiszetting</td></tr>
-      <tr><td>Organisatie</td><td>Welzijnsvereniging 't Sas, Brugge</td></tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="h1">
-  <h2>1 Beschrijving van het beleidsdomein</h2>
-
-  <h3>1.1 Werkveld en focus</h3>
-  <p>Ik schrijf deze syllabus over dak- en thuisloosheid. Dakloosheid raakt veel beleidsdomeinen tegelijk: wonen, welzijn, gezondheid, justitie, jeugdhulp en werk. Om de analyse scherp te houden, kies ik 2 domeinen: wonen en de preventie van uithuiszetting. Voor beide domeinen bestaan concrete maatregelen, en voor beide domeinen tonen cijfers wat die maatregelen opleveren. De andere domeinen komen terug op de plaatsen waar ze mensen naar dakloosheid duwen, bijvoorbeeld bij het verlaten van een gevangenis, een psychiatrisch ziekenhuis of de jeugdhulp.</p>
-
-  <h3>1.2 De organisatie: welzijnsvereniging 't Sas</h3>
-  <p>'t Sas is een welzijnsvereniging van het OCMW Brugge. De stad Brugge financiert de vereniging. Ongeveer 60 medewerkers en een groep vrijwilligers werken er. 't Sas bundelt een inloophuis, een nachtopvang, crisisopvang, een dienst preventie van uithuiszetting, een sociale kruidenier en sociale tewerkstelling.</p>
-  <p>De nachtopvang heeft 12 bedden in de zomer en 30 in de winter. In 2024 sliepen er 269 mensen. De stad bouwt een nieuwe nachtopvang met 30 plaatsen voor kort verblijf en 10 voor lang verblijf, het hele jaar open.</p>
-  <p>Ik kies 't Sas omdat de organisatie beide kanten van mijn focus in huis heeft. De dienst preventie van uithuiszetting probeert te voorkomen dat iemand zijn woning verliest. De nachtopvang vangt mensen op wanneer dat mislukt. Zo zie ik in 1 organisatie het begin en het einde van dezelfde keten.</p>
-
-  <h3>1.3 De doelgroep</h3>
-  <p>Vlaanderen definieert dak- en thuisloosheid met de Europese ETHOS-typologie. ETHOS telt iedereen zonder eigen, stabiele woning: mensen op straat, in de nachtopvang, bij vrienden of familie, in een instelling zonder woning om naar terug te gaan, en mensen met een dreigende uithuiszetting.</p>
-  <div class="stats">
-    <div class="stat"><span class="num">21.428</span><span class="lbl">dak- en thuisloze mensen in Vlaanderen, schatting 2025, onder wie 6.606 kinderen</span></div>
-    <div class="stat"><span class="num">904</span><span class="lbl">in het arrondissement Brugge, telling van oktober 2022, onder wie 221 kinderen</span></div>
-    <div class="stat"><span class="num">555</span><span class="lbl">in de stad Brugge in 2022: 418 volwassenen en 137 kinderen</span></div>
-  </div>
-  <p>De telling in het arrondissement Brugge toont vooral hoe onzichtbaar dakloosheid is. Van de 683 getelde volwassenen sliepen er 31 op straat (4,5%). Daarnaast verbleven er 201 bij familie, vrienden of kennissen (29,4%) en 174 in een instelling zonder woning om naar terug te gaan (25,5%). De onderzoekers wijzen op 2 Brugse bijzonderheden: veel instellingsverlaters en de vele psychiatrische ziekenhuizen in de regio. In de stad Brugge is bijna 1 op 4 dak- en thuisloze mensen jonger dan 25, en heeft 1 op 5 werk.</p>
-
-  <div class="note">
-    <strong>Welk gebied tellen deze cijfers?</strong>
-    <p>Wonen is een bevoegdheid van het Vlaams Gewest. Dat gebied omvat Brussel niet. Welzijn is een bevoegdheid van de Vlaamse Gemeenschap, die ook Nederlandstalige diensten in Brussel ondersteunt. Vlaanderen heeft voor beide 1 parlement en 1 regering. Daarom vermeld ik bij elk cijfer het gebied: Vlaanderen, het arrondissement Brugge of de stad Brugge. De schatting van 21.428 mensen gaat over Vlaanderen zonder Brussel.</p>
-  </div>
-
-  <h3>1.4 De grootste uitdagingen</h3>
-  <ul>
-    <li><strong>Te weinig sociale woningen.</strong> De wachtlijst bij Vivendo, de woonmaatschappij in Brugge, steeg van 3.077 kandidaten in 2023 naar 8.248 op 1 januari 2025. Een kandidaat wacht gemiddeld 6 jaar. In heel Vlaanderen staan meer dan 210.000 gezinnen op een wachtlijst.</li>
-    <li><strong>Een dure private huurmarkt.</strong> Een appartement in Brugge kost gemiddeld 728 euro per maand. Huurders besteden zo gemiddeld 42% van hun inkomen aan huur.</li>
-    <li><strong>Instellingsverlaters.</strong> Wie een gevangenis, psychiatrie of jeugdhulp verlaat zonder woning, belandt snel in de opvang.</li>
-    <li><strong>Opvang als eindpunt.</strong> Omdat mensen niet doorstromen naar een woning, wordt een crisisvoorziening een verblijfplaats voor lange tijd.</li>
-  </ul>
-</section>
-
-<section id="h2">
-  <h2>2 Analyse van de beleidsniveaus</h2>
-  <p>Per niveau beschrijf ik welke beleidskeuzes ik herken en hoe die het werk van 't Sas beïnvloeden. Vlaanderen is voor mijn focus het belangrijkste niveau, want Vlaanderen is bevoegd voor wonen, huur en welzijn. Op lokaal niveau zie ik het best wat de keuzes van de andere niveaus opleveren.</p>
-
-  <ol class="chain">
-    <li><span class="lvl">VN</span><span class="what">Recht op huisvesting als mensenrecht</span></li>
-    <li><span class="lvl">EU</span><span class="what">Afspraak om dakloosheid te beëindigen tegen 2030</span></li>
-    <li><span class="lvl">Federaal</span><span class="what">Grondwet, leefloon en referentieadres</span></li>
-    <li><span class="lvl">Vlaanderen</span><span class="what">Sociale huur, huurrecht en het actieplan 2026-2029</span></li>
-    <li><span class="lvl">Regio</span><span class="what">Tellingen, netwerken en de eerstelijnszone</span></li>
-    <li><span class="lvl">Brugge</span><span class="what">Brugge Draait Om Mensen 2030 en 't Sas</span></li>
-  </ol>
-
-  <h3>2.1 Verenigde Naties</h3>
-  <p><strong>Beleidskeuzes.</strong> Artikel 25 van de Universele Verklaring van de Rechten van de Mens en artikel 11 van het Internationaal Verdrag inzake Economische, Sociale en Culturele Rechten (IVESCR) erkennen het recht op huisvesting. Duurzame ontwikkelingsdoel 11.1 vraagt betaalbare en veilige huisvesting voor iedereen tegen 2030. In 2020 vroeg het VN-Comité voor Economische, Sociale en Culturele Rechten België om de aanpak van dakloosheid tussen federaal niveau en gewesten beter af te stemmen en nationale cijfers te verzamelen. In augustus 2026 schreef VN-rapporteur Koldo Casla de Vlaamse regering aan. Hij vreest dat de strengere taaleis en de lokale binding voor sociale huur mensen in armoede en daklozen uitsluiten.</p>
-  <p><strong>Invloed op 't Sas.</strong> Een dakloze kan het VN-verdrag niet voor een rechter afdwingen. Het verdrag geeft sociaal werkers wel een taal en een maatstaf: wonen is een recht. Vlaanderen telt sinds 2020 dak- en thuislozen per regio. Daarmee volgt Vlaanderen de vraag van het Comité naar cijfers.</p>
-
-  <h3>2.2 Raad van Europa</h3>
-  <p>De Raad van Europa is een andere organisatie dan de Europese Unie, maar voor mijn domein speelt die een sleutelrol. België aanvaardde artikel 31 van het Herziene Europees Sociaal Handvest (recht op huisvesting) niet, maar wel artikel 16 (bescherming van het gezin). Via dat artikel diende FEANTSA in 2021 een collectieve klacht in namens Woonzaak, een beweging van ongeveer 70 organisaties. In maart 2025 maakte het Europees Comité voor Sociale Rechten zijn beslissing publiek: Vlaanderen schendt het Handvest. Het woonbeleid steunt vooral eigendom, bouwt te weinig sociale woningen en doet te weinig tegen dakloosheid. Sociale woningen vormen ongeveer 6% van de Vlaamse woningen. Het Comité schat de nood op 14%.</p>
-
-  <h3>2.3 Europese Unie</h3>
-  <p><strong>Beleidskeuzes.</strong> Wonen is geen bevoegdheid van de EU. De EU stuurt daarom met afspraken, aanbevelingen en geld. Principe 19 van de Europese Pijler van Sociale Rechten vraagt sociale huisvesting, bescherming tegen uithuiszetting en opvang. Met de Verklaring van Lissabon (2021) beloofden de lidstaten, ook België, dakloosheid te beëindigen tegen 2030. Op 19 oktober 2026 keurde de Raad de eerste aanbeveling tegen woonuitsluiting goed. Elke lidstaat moet een nationale strategie maken met meetbare doelen, een systeem om dreigend woonverlies vroeg op te sporen en meer sociale woningen.</p>
-  <p><strong>Invloed op 't Sas.</strong> De invloed loopt via Vlaanderen. Het Vlaamse actieplan verwijst letterlijk naar Lissabon en neemt deel aan het Europees Platform tegen Dakloosheid. Het Europese "vroeg opsporen" is precies wat de dienst preventie van uithuiszetting van 't Sas elke dag doet.</p>
-
-  <h3>2.4 Federaal niveau</h3>
-  <p><strong>Beleidskeuzes.</strong> Artikel 23 van de Grondwet geeft iedereen het recht op een behoorlijke huisvesting. De OCMW-wet (1976) en de leefloonwet (2002) regelen het leefloon. Een dakloze kan een referentieadres krijgen bij het OCMW. Zonder adres krijg je moeilijk een leefloon, een uitkering of post. De federale overheid financiert Housing First-projecten: in januari 2026 opende ze een oproep van 2,55 miljoen euro. Vanaf de winter van 2026-2027 betaalt ze geen winterplan meer in 5 grote steden. Het samenwerkingsakkoord van 2014 verdeelt de taken tussen federaal niveau en gewesten. Een nieuw akkoord ligt klaar sinds 2024, maar ik vond geen bron die bevestigt dat het al geldt.</p>
-  <p><strong>Invloed op 't Sas.</strong> 't Sas hoort bij het OCMW Brugge. Federale regels over leefloon en referentieadres bepalen dus rechtstreeks of een bezoeker van de nachtopvang een inkomen heeft. Zonder inkomen is elke stap naar een woning onmogelijk.</p>
-
-  <h3>2.5 Vlaanderen</h3>
-  <p><strong>Beleidskeuzes.</strong> Artikel 1.5 van de Vlaamse Codex Wonen zegt: "Iedereen heeft recht op menswaardig wonen." Sinds de 6e staatshervorming (2014) regelt Vlaanderen ook de woninghuur, via het Vlaams Woninghuurdecreet. Elke woonmaatschappij moet per jaar 20% van haar sociale woningen versneld toewijzen aan mensen in nood. Het Fonds ter bestrijding van uithuiszettingen betaalt huurachterstal als de huurder begeleiding aanvaardt en de verhuurder de huur niet opzegt.</p>
-  <p>Op 13 februari 2026 keurde de Vlaamse regering het actieplan dak- en thuisloosheid 2026-2029 goed. Het plan kiest voor preventie eerst, een woongerichte aanpak en Housing First. Het bevat 6 assen: preventie, duurzame huisvesting, hulpverlening, opvang, samenwerking en monitoring. De regering noemt het zelf "beleidsintenties" zonder "bindende budgettaire engagementen".</p>
-  <table>
-    <thead><tr><th>Keuze in het actieplan</th><th>Budget</th></tr></thead>
-    <tbody>
-      <tr><td>Housing First, verankerd in de CAW's</td><td>975.000 euro per jaar</td></tr>
-      <tr><td>Fonds ter bestrijding van uithuiszettingen</td><td>1.741.000 euro in 2026</td></tr>
-      <tr><td>Huurpremie en huursubsidie, samen 1 stelsel</td><td>141 miljoen euro in 2026</td></tr>
-      <tr><td>Noodwoningen</td><td>Vlaanderen betaalt 50%, tot 330.000 euro per woning</td></tr>
-      <tr><td>Sociale woningen</td><td>50.000 extra tegen 2042</td></tr>
-    </tbody>
-  </table>
-  <p>Tegelijk maakt Vlaanderen de toegang tot sociale huur strenger. Kandidaat-huurders moeten Nederlands kennen op niveau B1 in plaats van A2. Vanaf 2028 moeten sociale huurders zonder werk zich inschrijven bij VDAB. Wie weigert, betaalt 50 tot 150 euro meer huur per maand. De voorrang voor wie lang in de gemeente woont, breidt uit.</p>
-  <p><strong>Invloed op 't Sas.</strong> Vlaamse toewijzingsregels bepalen wie in Brugge een sociale woning krijgt, ook de bezoekers van de nachtopvang. De dienst preventie van uithuiszetting werkt met het Vlaamse Fonds. Brugge bouwt zijn eigen preventiebeleid op dat Fonds.</p>
-  <p class="check">Check: de startdatum van de taaleis B1 lag in juni 2026 nog niet vast (Belga meldt 2027). Kijk de stand na vlak voor het examen.</p>
-
-  <h3>2.6 Regionaal niveau</h3>
-  <p><strong>Beleidskeuzes.</strong> De provincie West-Vlaanderen heeft sinds 2018 geen bevoegdheid meer voor welzijn. Het regionale niveau bestaat nu uit samenwerkingsverbanden. Het arrondissement Brugge was in 2022 een telregio. Volgens het actieplan moeten telregio's hun cijfers omzetten in een regionaal actieplan. De Vlaamse middelen voor Housing First gaan naar de CAW's, voor Brugge is dat CAW Noord-West-Vlaanderen. Het actieplan voorziet een CAW-huis in elke eerstelijnszone, waar iemand met dreigend woonverlies snel terechtkan. Bovenlokale netwerken brengen gemeenten, OCMW's, CAW's en woonactoren samen.</p>
-  <p><strong>Invloed op 't Sas.</strong> Diensten zoals 't Sas leveren de cijfers voor zo'n telling: in 2022 telden 52 organisaties mee. Brugge doet niet mee aan de telling van oktober 2026. De cijfers van 2022 blijven dus de recentste voor de regio.</p>
-  <p class="check">Check: bestaat er in 2026 een actief bovenlokaal netwerk voor de regio Brugge? De laatste bron (2023) meldt "on hold".</p>
-
-  <h3>2.7 Lokaal niveau: Brugge</h3>
-  <p><strong>Beleidskeuzes.</strong> Op 24 november 2025 keurde Brugge het lokaal sociaal beleidsplan Brugge Draait Om Mensen 2030 goed. Meer dan 260 professionals en 800 kwetsbare Bruggelingen dachten mee. Wonen is de topprioriteit. Werf 3, "Dak Boven Je Hoofd", bevat onder meer deze acties:</p>
-  <ul>
-    <li>de wachtlijst bij Vivendo met 1.000 kandidaten verminderen tegen eind 2030;</li>
-    <li>vanaf najaar 2026 meer gebruik van het Fonds, een eigen kader voor huurachterstal en een meldpunt;</li>
-    <li>een proef met 6 tijdelijke wooncontainers met begeleiding;</li>
-    <li>het OCMW betaalt de huur tijdens een psychiatrische opname, zodat de patiënt zijn woning niet verliest;</li>
-    <li>een nieuwe nachtopvang die het hele jaar open is.</li>
-  </ul>
-  <p><strong>Invloed op 't Sas.</strong> Verschillende acties van werf 3 komen bij 't Sas terecht: de preventie van uithuiszetting en de nieuwe nachtopvang. Het plan zegt over preventie: "want het werkt!"</p>
-
-  <h3>2.8 Verbanden tussen de niveaus</h3>
-  <table>
-    <thead><tr><th>Van</th><th>Naar</th><th>Verband</th></tr></thead>
-    <tbody>
-      <tr><td>VN (2020)</td><td>Vlaanderen</td><td>Het Comité vraagt cijfers. Vlaanderen start met tellingen per regio.</td></tr>
-      <tr><td>Raad van Europa</td><td>Vlaanderen</td><td>Vlaamse organisaties gebruiken een Europees instrument om het Vlaamse woonbeleid aan te klagen.</td></tr>
-      <tr><td>EU (Lissabon)</td><td>Vlaanderen</td><td>Het actieplan neemt het doel "einde dakloosheid tegen 2030" over.</td></tr>
-      <tr><td>Federaal</td><td>Brugge</td><td>De federale overheid stopt het winterplan. Steden en gewesten moeten het gat vullen.</td></tr>
-      <tr><td>Vlaanderen</td><td>Brugge en 't Sas</td><td>Vlaanderen levert het Fonds en de toewijzingsregels. Brugge voert uit, via 't Sas en Vivendo.</td></tr>
-    </tbody>
-  </table>
-
-  <h3>2.9 Maatregel en zichtbaar effect</h3>
-  <table>
-    <thead><tr><th>Maatregel</th><th>Zichtbaar effect</th></tr></thead>
-    <tbody>
-      <tr><td>Fonds ter bestrijding van uithuiszettingen</td><td>Goedgekeurde overeenkomsten stegen van 99 (2020) naar 303 (2024), het hoogste aantal tot nu.</td></tr>
-      <tr><td>Housing First</td><td>Belgische evaluaties tonen ongeveer 90% woonbehoud na 2 jaar.</td></tr>
-      <tr><td>Oproep noodwoningen</td><td>In 2020 waren 2.500 extra noodwoningen nodig. Tot 2022 keurde Vlaanderen er 409 goed (16%).</td></tr>
-      <tr><td>Sociale huur in Brugge</td><td>De wachtlijst bij Vivendo verdubbelde ruim op 2 jaar: van 3.077 naar 8.248.</td></tr>
-    </tbody>
-  </table>
-  <p>Een stijgend aantal overeenkomsten bij het Fonds kan 2 dingen betekenen: het Fonds raakt beter bekend, of meer huurders komen in de problemen. Ik denk dat beide waar zijn. De wachtlijst toont dat de druk op de huurmarkt stijgt, en het Vlaamse plan investeert net in de bekendheid van het Fonds.</p>
-</section>
-
-<section id="h3">
-  <h2>3 Micro, meso en macro: de armoedemodellen van Vranken</h2>
-  <p>Vranken zoekt de oorzaak van armoede op 3 niveaus: het individu (micro), de instellingen en groepen (meso) en de samenleving (macro). Op elk niveau vraagt hij of het om schuld of om pech gaat. Zo ontstaan 6 verklaringsmodellen. Elk model leidt tot een ander soort beleid. Daarom zoek ik bij elk model een maatregel uit mijn domein.</p>
-  <table>
-    <thead><tr><th>Model</th><th>Verklaring</th><th>Maatregel in het beleid</th></tr></thead>
-    <tbody>
-      <tr><td>Individueel schuldmodel (micro)</td><td>De persoon maakt verkeerde keuzes of doet te weinig moeite.</td><td>De VDAB-plicht met hogere huur als sanctie. De taaleis B1 als voorwaarde voor sociale huur.</td></tr>
-      <tr><td>Individueel ongevalmodel (micro)</td><td>De persoon krijgt pech: ziekte, ontslag, scheiding.</td><td>Het Fonds betaalt eenmalig huurachterstal. Het OCMW Brugge betaalt de huur tijdens een psychiatrische opname.</td></tr>
-      <tr><td>Institutioneel schuldmodel (meso)</td><td>Diensten en instellingen sluiten mensen uit met drempels en procedures.</td><td>Zonder referentieadres geen leefloon. Instellingen ontslaan mensen zonder woning. Het actieplan antwoordt met afspraken over doorstroom en een CAW-huis per eerstelijnszone.</td></tr>
-      <tr><td>Institutioneel ongevalmodel (meso)</td><td>Instellingen sluiten mensen uit zonder het zo te bedoelen: versnippering, stigma, digitalisering.</td><td>De halfweg-evaluatie van het vorige plan: Wonen en Welzijn werkten met aparte doelen en het werkveld kende het plan nauwelijks.</td></tr>
-      <tr><td>Maatschappelijk schuldmodel (macro)</td><td>De samenleving verdeelt middelen ongelijk.</td><td>Het Europees Comité stelt vast dat het Vlaamse beleid eigendom steunt en te weinig sociale woningen bouwt. Antwoord: 50.000 extra sociale woningen tegen 2042.</td></tr>
-      <tr><td>Maatschappelijk ongevalmodel (macro)</td><td>Een crisis treft veel mensen tegelijk: inflatie, energieprijzen, stijgende huurprijzen.</td><td>Huurpremie en huursubsidie (141 miljoen euro) vangen een deel van de huurprijs op.</td></tr>
-    </tbody>
-  </table>
-
-  <h3>3.1 Hoe speelt het beleid in op elk niveau?</h3>
-  <p><strong>Micro.</strong> Hier ligt de meeste actie. Housing First, woonbegeleiding, bemoeizorg en het Fonds werken met 1 persoon of 1 gezin. Deze maatregelen werken: 90% woonbehoud bij Housing First, 303 goedgekeurde overeenkomsten bij het Fonds in 2024. Ze bereiken wel telkens weinig mensen.</p>
-  <p><strong>Meso.</strong> Het actieplan wil diensten beter laten samenwerken: CAW-huizen, intersectorale teams voor jongvolwassenen, gegevensdeling en bovenlokale netwerken. Dat pakt de drempels tussen diensten aan. Het geld hiervoor komt "binnen bestaande budgetten".</p>
-  <p><strong>Macro.</strong> Het aantal sociale woningen en de prijs van de huurmarkt bepalen hoeveel mensen dakloos worden. Op dit niveau maakt het beleid de grootste beloftes (recht op wonen, einde dakloosheid tegen 2030) en de kleinste stappen: 50.000 woningen tegen 2042 terwijl 210.000 gezinnen wachten.</p>
-
-  <h3>3.2 Individuele factoren of structurele benadering?</h3>
-  <p>Het beleid spreekt structureel, maar handelt vaak individueel. De teksten vertrekken vanuit rechten: de Codex Wonen, het einde van dakloosheid tegen 2030, preventie en Housing First. Wie naar het geld en de voorwaarden kijkt, ziet iets anders.</p>
-  <ul>
-    <li><strong>Structureel:</strong> de 50.000 extra sociale woningen, de 20% versnelde toewijzing, Housing First (wonen zonder voorwaarden vooraf) en het Fonds, dat huurachterstal als een risico van de huurmarkt behandelt.</li>
-    <li><strong>Individueel:</strong> de VDAB-plicht, de taaleis, de lokale binding en de doorstroompremie. Deze maatregelen leggen de oplossing bij de huurder: werk zoeken, de taal leren, naar de private markt verhuizen.</li>
-  </ul>
-  <p>De verhouding in het budget is het duidelijkste signaal. Housing First, volgens het actieplan zelf een "bewezen effectief model", krijgt 975.000 euro per jaar. Dat is minder dan 1% van wat huurpremie en huursubsidie krijgen. Het beleid kiest dus voor brede steun aan huurders en voor strengere voorwaarden aan de poort. Voor de groep die het langst dakloos is, blijft de structurele aanpak klein.</p>
-  <p class="check">Standpunt van Ruben? Deze conclusie is een voorstel. Kijk of je ermee akkoord gaat, en draai ze om als je het anders ziet. Op het examen moet je ze kunnen verdedigen.</p>
-</section>
-
-<section id="h4">
-  <h2>4 Plaats van sociaal werk binnen het beleid</h2>
-  <p>De internationale definitie van sociaal werk (IFSW, 2014) noemt sociale verandering, sociale rechtvaardigheid en mensenrechten als kern van het beroep. In mijn domein zie ik 3 rollen.</p>
-  <p><strong>Sociaal werk voert het beleid uit.</strong> Veel maatregelen werken alleen met een sociaal werker erbij. Het Fonds betaalt enkel als de huurder begeleiding aanvaardt. Housing First bestaat uit een woning en begeleiding. Bemoeizorg betekent dat een hulpverlener actief naar de zorgmijder toe gaat. In 't Sas doet de dienst preventie van uithuiszetting dat werk: de dienst spoort huurders met een dreigende uithuiszetting op en begeleidt hen.</p>
-  <p><strong>Sociaal werk maakt problemen zichtbaar.</strong> Beleid steunt op cijfers, en sociaal werkers leveren die cijfers. 52 organisaties telden mee in het arrondissement Brugge. Jaarverslagen van diensten zoals 't Sas tonen hoe lang mensen in de opvang blijven en waarom ze niet doorstromen.</p>
-  <p><strong>Sociaal werk staat tussen de persoon en het systeem.</strong> Een sociaal werker ziet elke dag waar een regel knelt. Een referentieadres hangt af van voorwaarden. Een sociale woning hangt af van een taaltest. Die positie maakt sociaal werk belangrijk in dit domein. Een beleidsmaker ziet een wachtlijst van 8.248 namen. Een sociaal werker kent de mensen achter die namen.</p>
-  <p>Daarom vind ik sociaal werk onmisbaar in dit domein. Zonder sociaal werk blijven de beste maatregelen papier, en blijft het beleid blind voor wie uit de boot valt.</p>
-</section>
-
-<section id="h5">
-  <h2>5 Kritische reflectie en uitdagingen voor sociaal werk</h2>
-
-  <h3>5.1 Sterktes en beperkingen van het beleid</h3>
-  <table>
-    <thead><tr><th>Sterktes</th><th>Beperkingen</th></tr></thead>
-    <tbody>
-      <tr><td>Preventie krijgt voorrang, en het Fonds toont meetbaar resultaat.</td><td>Het actieplan bevat geen bindende budgetten.</td></tr>
-      <tr><td>Housing First staat erkend als bewezen model.</td><td>Housing First blijft projectwerk met een klein budget.</td></tr>
-      <tr><td>Vlaanderen telt en meet, en Brugge betrekt 800 kwetsbare inwoners bij zijn plan.</td><td>De wachtlijsten groeien sneller dan het aanbod aan sociale woningen.</td></tr>
-      <tr><td>Het EU-, Vlaamse en Brugse beleid vertrekken van hetzelfde doel voor 2030.</td><td>De federale overheid trekt zich terug uit het winterplan, en de toegang tot sociale huur wordt strenger.</td></tr>
-    </tbody>
-  </table>
-  <p>Ook kritische organisaties wijzen op die beperkingen. Het Netwerk tegen Armoede noemt het actieplan "niet ambitieus genoeg" om dakloosheid tegen 2030 weg te werken. De VVSG waarschuwt dat gemeenten een sleutelrol krijgen zonder extra structureel geld.</p>
-
-  <h3>5.2 Mensenrechten en sociale rechtvaardigheid</h3>
-  <p>Het recht op wonen staat in de Grondwet, in een VN-verdrag en in de Codex Wonen. Toch kan niemand het afdwingen. Een wachttijd van 6 jaar maakt van een recht een belofte. Het Europees Comité oordeelde dat Vlaanderen het Sociaal Handvest schendt, maar die uitspraak heeft geen gevolg dat iemand kan afdwingen.</p>
-  <p>Voorwaarden raken ook de gelijke behandeling. De taaleis en de lokale binding treffen vooral nieuwkomers en mensen die vaak verhuizen. Dat is precies de groep die het grootste risico loopt op dakloosheid. Wie het recht op wonen aan voorwaarden koppelt, maakt het minder universeel. Dat vind ik een kernvraag van sociale rechtvaardigheid: krijgt de meest kwetsbare persoon de meeste steun, of de meeste drempels?</p>
-  <p class="check">Standpunt van Ruben? Bepaal wat jij vindt van voorwaarden zoals de VDAB-plicht. Werk kan een uitweg uit armoede zijn. Is een sanctie op de huur daarvoor het juiste middel?</p>
-
-  <h3>5.3 Uitdagingen voor sociaal werk</h3>
-  <p><strong>Operationeel.</strong> Sociaal werkers begeleiden mensen naar een woning die er niet is. Ze schrijven mensen in op een wachtlijst van 6 jaar. Ze werken met projectgeld dat elk jaar kan stoppen. Ze moeten samenwerken met wonen, welzijn, justitie en psychiatrie, die elk hun eigen regels volgen.</p>
-  <p><strong>Ethisch.</strong> Ik zie 3 spanningen.</p>
-  <ul>
-    <li><strong>Gegevensdeling en beroepsgeheim.</strong> Vlaanderen wil dat diensten gegevens delen om dreigend woonverlies vroeg op te sporen. Dat kan woningen redden. Het kan ook het vertrouwen tussen cliënt en hulpverlener schaden.</li>
-    <li><strong>Bemoeizorg en autonomie.</strong> Aanklampend werken bereikt zorgmijders. Het betekent ook hulp die niemand vroeg.</li>
-    <li><strong>Helpen en controleren.</strong> Als de VDAB-plicht ingaat, wordt de sociaal werker mee verantwoordelijk voor een regel die de huur van de cliënt kan verhogen.</li>
-  </ul>
-
-  <h3>5.4 Politiserend werken</h3>
-  <p>Politiserend werken betekent dat een sociaal werker de maatschappelijke oorzaken van individuele problemen zichtbaar maakt en op de agenda van het beleid zet. Partijpolitiek hoort daar niet bij. Het gaat om de vraag welke regels mensen helpen en welke regels hen tegenhouden. Mijn domein toont dat het werkt. Woonzaak bracht het Vlaamse woonbeleid voor het Europees Comité en kreeg gelijk. In het gemengd platform dak- en thuisloosheid adviseren het Netwerk tegen Armoede, SAAMO, de CAW's en de VVSG de ministers 2 keer per jaar.</p>
-  <p>Vanuit 't Sas zou ik zo politiserend werken:</p>
-  <ol>
-    <li><strong>Registreren.</strong> Bijhouden waarom bezoekers niet doorstromen: geen sociale woning, geweigerd op de private markt, geen referentieadres, instelling verlaten zonder woning.</li>
-    <li><strong>Bundelen.</strong> Die cijfers en getuigenissen elk jaar samenbrengen in het jaarverslag en voorleggen aan het bovenlokale netwerk en de Brugse gemeenteraad.</li>
-    <li><strong>Samen met de doelgroep.</strong> Bezoekers en ervaringsdeskundigen zelf laten spreken, zoals Brugge deed bij Brugge Draait Om Mensen 2030.</li>
-    <li><strong>Rechten gebruiken.</strong> Het signaal koppelen aan het recht op wonen uit de Grondwet, het VN-verdrag en de Codex Wonen. Zo spreekt het signaal de taal van het beleid.</li>
-  </ol>
-
-  <h3>5.5 Mijn rol als toekomstig sociaal werker</h3>
-  <p>Ik merk bij mezelf dat ik snel naar structurele oorzaken kijk: de woningmarkt, de wachtlijsten, de voorwaarden. Dat is een sterkte, maar ook een blinde vlek. Een persoon die vandaag op straat staat, heeft niets aan een analyse van de woningmarkt. Mijn rol is dus dubbel: vandaag de rechten van mijn cliënt waarborgen, en morgen het beleid helpen veranderen.</p>
-  <p>Daarvoor heb ik 4 vaardigheden nodig.</p>
-  <ul>
-    <li><strong>Kennis van rechten en procedures</strong>: leefloon, referentieadres, het Fonds en de regels voor sociale huur. Een cliënt die zijn rechten niet kent, laat ze liggen. Ik moet ze dus kennen.</li>
-    <li><strong>De sociale kaart</strong>: weten welke dienst wat doet, zodat ik iemand warm kan doorverwijzen.</li>
-    <li><strong>Signaleren met cijfers</strong>: beleidsmakers luisteren naar signalen die ik met cijfers en voorbeelden onderbouw.</li>
-    <li><strong>Kritische zelfreflectie</strong>: blijven nagaan of ik de cliënt help of het systeem dien, vooral wanneer die 2 botsen.</li>
-  </ul>
-  <p class="check">Standpunt van Ruben? Pas deze paragraaf aan je eigen ervaring en ambitie aan. Op het examen vraagt de lector naar jouw rol, in jouw woorden.</p>
-</section>
-
-<section id="bronnen">
-  <h2>Bronnenlijst en AI-toelichting</h2>
-  <h3>Bronnenlijst (APA 7)</h3>
-  <ul class="sources">
-    <li>Belga News Agency. (2026). <em>Flemish government tightens language requirements for social housing tenants</em>. <a href="https://www.belganewsagency.eu/flemish-government-tightens-language-requirements-for-social-housing-tenants">https://www.belganewsagency.eu/flemish-government-tightens-language-requirements-for-social-housing-tenants</a></li>
-    <li>De Gids op Maatschappelijk Gebied. (2026, april). <em>Dossier wonen en armoede</em>. <a href="https://armoedebestrijding.be/wp-content/uploads/2026/04/26-04-De-Gids-op-Maatschappelijk-Gebied-april-2026-volledig-11-17-1.pdf">https://armoedebestrijding.be/wp-content/uploads/2026/04/26-04-De-Gids-op-Maatschappelijk-Gebied-april-2026-volledig-11-17-1.pdf</a></li>
-    <li>Housing Rights Watch. (2024). <em>FEANTSA v. Belgium, Collective Complaint No. 203/2021</em>. <a href="https://housingrightswatch.org/node/1205">https://housingrightswatch.org/node/1205</a></li>
-    <li>International Federation of Social Workers. (2014). <em>Global definition of social work</em>. <a href="https://www.ifsw.org/what-is-social-work/global-definition-of-social-work/">https://www.ifsw.org/what-is-social-work/global-definition-of-social-work/</a></li>
-    <li>Koning Boudewijnstichting & LUCAS KU Leuven. (2023). <em>Telling dak- en thuisloosheid: Infofiche arrondissement Brugge</em>. <a href="https://kbs-frb.be/nl/telling-dak-en-thuisloosheid-infofiche-arrondissement-brugge">https://kbs-frb.be/nl/telling-dak-en-thuisloosheid-infofiche-arrondissement-brugge</a></li>
-    <li>Netwerk tegen Armoede. (2026, maart). <em>Naar schatting meer dan 21.000 mensen in dak- en thuisloosheid in Vlaanderen</em>. <a href="https://www.netwerktegenarmoede.be/nl/nieuws/2026/naar-schatting-meer-dan-21-000-mensen-in-dak-en-thuisloosheid-in-vlaanderen-cijfers-2025">https://www.netwerktegenarmoede.be/nl/nieuws/2026/naar-schatting-meer-dan-21-000-mensen-in-dak-en-thuisloosheid-in-vlaanderen-cijfers-2025</a></li>
-    <li>Raad van de Europese Unie. (2026). <em>Council Recommendation on fighting housing exclusion</em> (ST 14355 2026). <a href="https://data.consilium.europa.eu/doc/document/ST-14355-2026-INIT/en/pdf">https://data.consilium.europa.eu/doc/document/ST-14355-2026-INIT/en/pdf</a></li>
-    <li>SAM vzw. (2023). <em>Beëindigen van dak- en thuisloosheid: zes aanbevelingen. Halfweg evaluatie Vlaams Actieplan</em>. <a href="https://www.samvzw.be/sites/default/files/2023-03/230104_R_Halfweg%20evaluatie%20Vlaams%20Actieplan%20ter%20voorkoming%20en%20bestrijding%20van%20dak.pdf">https://www.samvzw.be/sites/default/files/2023-03/230104_R_Halfweg evaluatie Vlaams Actieplan ter voorkoming en bestrijding van dak.pdf</a></li>
-    <li>Stad Brugge. (2025). <em>Brugge Draait Om Mensen 2030: Lokaal sociaal beleidsplan, beleidsprogramma 2026</em>. <a href="https://www.brugge.be/sites/default/files/2026-02/Lokaal%20Sociaal%20Beleid%20-%20Beleidsprogramma%202026_0.pdf">https://www.brugge.be/sites/default/files/2026-02/Lokaal Sociaal Beleid - Beleidsprogramma 2026_0.pdf</a></li>
-    <li>Stad Brugge. (z.d.). <em>Nachtopvang voor thuis- en daklozen</em>. <a href="https://www.brugge.be/zorg-welzijn/algemene-hulp/opvang-daklozen/nachtopvang-voor-thuis-en-daklozen">https://www.brugge.be/zorg-welzijn/algemene-hulp/opvang-daklozen/nachtopvang-voor-thuis-en-daklozen</a></li>
-    <li>Stad Gent. (z.d.). <em>Trek aan de bel tegen armoede: achtergrondinformatie voor leerkrachten</em>. <a href="https://stad.gent/sites/default/files/media/documents/Lessenpakket_achtergrondinformatie.pdf">https://stad.gent/sites/default/files/media/documents/Lessenpakket_achtergrondinformatie.pdf</a></li>
-    <li>Steunpunt tot bestrijding van armoede. (2026). <em>Globaal rapport tellingen dak- en thuisloosheid 2025</em>. <a href="https://armoedebestrijding.be/wp-content/uploads/2026/04/Globaal-rapport-tellingen-2025.pdf">https://armoedebestrijding.be/wp-content/uploads/2026/04/Globaal-rapport-tellingen-2025.pdf</a></li>
-    <li>United Nations Committee on Economic, Social and Cultural Rights. (2020). <em>Concluding observations on the fifth periodic report of Belgium</em> (E/C.12/BEL/CO/5). <a href="https://digitallibrary.un.org/record/3865455">https://digitallibrary.un.org/record/3865455</a></li>
-    <li>Vlaamse overheid. (2026). <em>Tellingen dak- en thuisloosheid</em>. <a href="https://www.vlaanderen.be/gezondheid-en-welzijn/armoede/armoedebestrijding-in-vlaanderen/tellingen-dak-en-thuisloosheid">https://www.vlaanderen.be/gezondheid-en-welzijn/armoede/armoedebestrijding-in-vlaanderen/tellingen-dak-en-thuisloosheid</a></li>
-    <li>Vlaamse Regering. (2026). <em>Vlaams Actieplan ter voorkoming en bestrijding van dak- en thuisloosheid 2026-2029</em> (VR 2026 1302 MED.0067/2BIS). <a href="https://themis.vlaanderen.be">https://themis.vlaanderen.be</a></li>
-    <li>Vranken, J. Armoedemodellen: individueel, institutioneel en maatschappelijk schuld- en ongevalmodel. Leerinhoud Sociaal beleid, 2026-2027.</li>
-    <li>VRT NWS. (2025, 18 maart). <em>Vernietigend oordeel Europees Comité voor Sociale Rechten over Vlaams woonbeleid</em>. <a href="https://www.vrt.be/vrtnws/nl/2025/03/18/vernietigend-oordeel-europees-comite-voor-sociale-rechten-over-v/">https://www.vrt.be/vrtnws/nl/2025/03/18/vernietigend-oordeel-europees-comite-voor-sociale-rechten-over-v/</a></li>
-    <li>VRT NWS. (2026, 5 juni). <em>Sociale huurders die niet werken riskeren vanaf 2028 hogere huur</em>. <a href="https://www.vrt.be/vrtnws/nl/2026/06/05/sociale-huurders-die-niet-werken-riskeren-vanaf-2028-hogere-huur/">https://www.vrt.be/vrtnws/nl/2026/06/05/sociale-huurders-die-niet-werken-riskeren-vanaf-2028-hogere-huur/</a></li>
-    <li>VRT NWS. (2026, 12 augustus). <em>VN-rapporteur heeft kritiek op Vlaams beleid sociaal wonen</em>. <a href="https://www.vrt.be/vrtnws/nl/2026/08/12/vn-rapporteur-heeft-kritiek-op-vlaams-beleid-sociaal-wonen/">https://www.vrt.be/vrtnws/nl/2026/08/12/vn-rapporteur-heeft-kritiek-op-vlaams-beleid-sociaal-wonen/</a></li>
-    <li>VVSG. (2026). <em>Vlaams actieplan dak- en thuisloosheid erkent lokale sleutelrol, onduidelijkheid over extra middelen</em>. <a href="https://www.vvsg.be/nieuwsoverzicht/vlaams-actieplan-dak-en-thuisloosheid-erkent-lokale-sleutelrol-onduidelijkheid-over">https://www.vvsg.be/nieuwsoverzicht/vlaams-actieplan-dak-en-thuisloosheid-erkent-lokale-sleutelrol-onduidelijkheid-over</a></li>
-    <li>Wonen in Vlaanderen. (2025). <em>Jaarverslag 2024: Woonzekerheid</em>. <a href="https://www.vlaanderen.be/wonen-in-vlaanderen/onderzoek-en-cijfers-wonen/jaarverslag-2024/woonzekerheid">https://www.vlaanderen.be/wonen-in-vlaanderen/onderzoek-en-cijfers-wonen/jaarverslag-2024/woonzekerheid</a></li>
-  </ul>
-  <p class="check">Check: vervang de Vranken-referentie door de exacte bron uit de cursus.</p>
-
-  <h3>AI-toelichting</h3>
-  <p>Ik gebruikte Claude (Anthropic) in november 2026 voor 3 taken: beleidsdocumenten, cijfers en bronnen per beleidsniveau verzamelen; een eerste versie van de tekst schrijven volgens het sjabloon; en open punten aanduiden die ik zelf moest nakijken. Ik controleerde elk cijfer in de oorspronkelijke bron, paste de standpunten aan mijn eigen visie aan en herschreef de tekst waar die niet bij mij paste.</p>
-  <p class="check">Pas deze toelichting aan zodra je de tekst zelf hebt nagelezen en bewerkt. Ze moet kloppen met wat je echt deed.</p>
-</section>
-
+<main id="syllabus">
+  <section class="hero"><p class="lead">De syllabus wordt geladen...</p></section>
 </main>
 </div>
 
-<footer class="foot">Persoonlijke syllabus sociaal beleid, Ruben Mergaert, academiejaar 2026-2027.</footer>
+<footer class="foot">Persoonlijke syllabus sociaal beleid, Ruben Mergaert, academiejaar 2026-2027. <a href="admin.html">Beheer</a></footer>
 
-<script src="vendor/docx.js"></script>
+<script src="vendor/mammoth.js"></script>
 <script src="app.js"></script>
+<script src="render.js"></script>
+<script>
+  (async () => {
+    const main = document.getElementById("syllabus");
+    const toc = document.getElementById("toc-list");
+    try {
+      const res = await fetch("content/syllabus.docx?v=" + Date.now(), { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      await renderSyllabus(await res.arrayBuffer(), main);
+      buildToc(main, toc);
+      initToc();
+      if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+    } catch (err) {
+      console.error("[syllabus] laden mislukt", err);
+      main.innerHTML = "<section><h2>De syllabus kon niet laden</h2><p>Open de site via een webserver of GitHub Pages. Een lokaal geopend bestand mag het Word-bestand niet inlezen.</p></section>";
+    }
+    document.getElementById("download-page").addEventListener("click", () => downloadStandalone(main, toc));
+  })();
+</script>
 </body>
 </html>
