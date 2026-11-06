@@ -41,6 +41,50 @@ async function github(token, method, body) {
 let token = null;
 let fileBytes = null;
 
+const SESSION_KEY = "admin-token";
+const SESSION_TTL_MS = 48 * 60 * 60 * 1000;
+
+function saveSession(savedToken) {
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({ token: savedToken, expires: Date.now() + SESSION_TTL_MS }));
+  } catch { }
+}
+function loadSession() {
+  try {
+    const raw = localStorage.getItem(SESSION_KEY);
+    if (!raw) return null;
+    const box = JSON.parse(raw);
+    if (typeof box.token !== "string" || Date.now() >= box.expires) {
+      localStorage.removeItem(SESSION_KEY);
+      return null;
+    }
+    return box.token;
+  } catch {
+    return null;
+  }
+}
+function clearSession() {
+  try { localStorage.removeItem(SESSION_KEY); } catch { }
+}
+
+// Ask GitHub whether the saved token still works; it may have been revoked
+// or the password may have changed since it was saved.
+async function restoreSession() {
+  const saved = loadSession();
+  if (!saved) return;
+  try {
+    const res = await github(saved, "GET");
+    if (res.ok || res.status === 404) {
+      token = saved;
+      $("login").hidden = true;
+      $("workspace").hidden = false;
+    } else if (res.status === 401 || res.status === 403) {
+      clearSession();
+    }
+  } catch { }
+}
+restoreSession();
+
 function choosePage(key) {
   page = PAGES[key];
   const link = $("download-current");
@@ -63,6 +107,7 @@ $("login-form").addEventListener("submit", async (e) => {
   msg.className = "msg";
   try {
     token = await unlockToken($("password").value);
+    saveSession(token);
     $("login").hidden = true;
     $("workspace").hidden = false;
   } catch (err) {
@@ -71,6 +116,18 @@ $("login-form").addEventListener("submit", async (e) => {
       ? "Er is nog geen wachtwoord ingesteld. Voer eerst tools/set-password.mjs uit."
       : "Fout wachtwoord.";
   }
+});
+
+$("logout").addEventListener("click", () => {
+  clearSession();
+  token = null;
+  fileBytes = null;
+  $("workspace").hidden = true;
+  $("preview").hidden = true;
+  $("status").hidden = true;
+  $("login").hidden = false;
+  $("password").value = "";
+  $("login-msg").textContent = "";
 });
 
 async function loadFile(file) {
