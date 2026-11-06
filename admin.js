@@ -1,6 +1,6 @@
 // The GitHub token lives in admin-key.json, encrypted with a key derived from the password.
 // The repo never holds the password or a readable token. tools/set-password.mjs writes the file.
-const REPO = { owner: "CornillieJ", name: "dakloosheid-syllabus", branch: "main", path: "content/syllabus.docx" };
+const REPO = { owner: "MergaertR", name: "dakloosheid-syllabus", branch: "main", path: "content/syllabus.docx" };
 
 const $ = (id) => document.getElementById(id);
 const fromB64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));

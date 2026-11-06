@@ -9,7 +9,7 @@ import { createInterface } from "node:readline/promises";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const KEY_FILE = new URL("../admin-key.json", import.meta.url);
-const REPO = "CornillieJ/dakloosheid-syllabus";
+const REPO = "MergaertR/dakloosheid-syllabus";
 const ITERATIONS = 600_000;
 const { subtle } = globalThis.crypto;
 
