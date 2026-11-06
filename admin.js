@@ -48,7 +48,7 @@ $("login-form").addEventListener("submit", async (e) => {
   } catch (err) {
     msg.className = "msg error";
     msg.textContent = err.message === "no-key"
-      ? "Er is nog geen wachtwoord ingesteld. Vraag Jeffrey om tools/set-password.mjs uit te voeren."
+      ? "Er is nog geen wachtwoord ingesteld. Voer eerst tools/set-password.mjs uit."
       : "Fout wachtwoord.";
   }
 });
@@ -112,7 +112,7 @@ async function run(btn, msg, busyText, task) {
   } catch (err) {
     console.error("[admin] mislukt", err);
     msg.className = "msg error";
-    msg.textContent = `Mislukt. ${err.message}. Probeer opnieuw, of stuur Jeffrey deze melding.`;
+    msg.textContent = `Mislukt. ${err.message}. Probeer opnieuw, of bewaar deze melding.`;
   } finally {
     btn.disabled = false;
   }
