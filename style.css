@@ -162,3 +162,27 @@ cite { display: block; font-family: "Source Sans 3", sans-serif; font-size: .85r
   .topbar, .toc { display: none; }
   main section { box-shadow: none; }
 }
+
+h3 { font-size: 1.15rem; margin: 1.6rem 0 .4rem; }
+details > h3:first-of-type { margin-top: .6rem; }
+
+.chain { list-style: none; padding: 0; margin: 1rem 0 1.5rem; display: grid; gap: .35rem; }
+.chain li {
+  display: grid; grid-template-columns: 130px 1fr; align-items: center; gap: 1rem;
+  padding: .55rem .9rem; border-radius: 8px; background: var(--bg); border: 1px solid var(--line);
+  position: relative;
+}
+.chain li:not(:last-child)::after {
+  content: ""; position: absolute; left: 64px; bottom: -.45rem; width: 2px; height: .55rem; background: var(--accent);
+}
+.chain .lvl {
+  font-weight: 700; font-size: .82rem; text-transform: uppercase; letter-spacing: .05em;
+  background: var(--accent); color: var(--accent-ink); border-radius: 6px; padding: .2rem .5rem; text-align: center;
+}
+.chain li:last-child { border-color: var(--accent); }
+.chain .what { font-size: .95rem; }
+
+@media (max-width: 900px) {
+  .chain li { grid-template-columns: 1fr; gap: .3rem; }
+  .chain li::after { display: none; }
+}

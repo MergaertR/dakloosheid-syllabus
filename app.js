@@ -93,6 +93,7 @@ function convert(el) {
   if (cls.contains("end-mark")) return [];
   if (tag === "H1") return [new Paragraph({ heading: HeadingLevel.TITLE, children: inlineRuns(el) })];
   if (tag === "H2") return [new Paragraph({ heading: HeadingLevel.HEADING_1, children: inlineRuns(el), spacing: { before: 360, after: 160 } })];
+  if (tag === "H3") return [new Paragraph({ heading: HeadingLevel.HEADING_3, children: inlineRuns(el), spacing: { before: 240, after: 100 } })];
   if (tag === "SUMMARY") return [new Paragraph({ heading: HeadingLevel.HEADING_2, children: inlineRuns(el) })];
   if (tag === "P") {
     if (cls.contains("kicker")) return [para(el, { fmt: { allCaps: true, bold: true, color: "6B645A" } })];
@@ -116,11 +117,12 @@ function convert(el) {
       new Paragraph({ children: [new TextRun({ text: el.querySelector("cite").textContent, color: "6B645A", size: 20 })], indent: { left: 567 }, spacing: { after: 200 } }),
     ];
   }
-  if (cls.contains("timeline")) {
+  if (cls.contains("timeline") || cls.contains("chain")) {
+    const key = cls.contains("timeline") ? ".year" : ".lvl";
     return [...el.children].map((li) => new Paragraph({
       bullet: { level: 0 },
       children: [
-        new TextRun({ text: li.querySelector(".year").textContent + ": ", bold: true }),
+        new TextRun({ text: li.querySelector(key).textContent + ": ", bold: true }),
         new TextRun(li.querySelector(".what").textContent),
       ],
     }));
@@ -149,6 +151,7 @@ async function exportDocx() {
           { id: "Title", name: "Title", basedOn: "Normal", next: "Normal", run: { font: "Georgia", size: 48, bold: true }, paragraph: { spacing: { after: 200 } } },
           { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", run: { font: "Georgia", size: 32, bold: true, color: "1D1B18" } },
           { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", run: { size: 24, bold: true, color: "6B645A" }, paragraph: { spacing: { before: 200, after: 100 } } },
+          { id: "Heading3", name: "Heading 3", basedOn: "Normal", next: "Normal", run: { size: 23, bold: true, color: "1D1B18" } },
         ],
       },
       sections: [{ children }],
@@ -156,7 +159,7 @@ async function exportDocx() {
     const blob = await Packer.toBlob(doc);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "syllabus-dakloosheid-vlaanderen.docx";
+    a.download = "onderzoeksdossier-dakloosheid-brugge.docx";
     a.click();
     URL.revokeObjectURL(a.href);
   } catch (err) {
