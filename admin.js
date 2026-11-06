@@ -1,6 +1,11 @@
 // The GitHub token lives in admin-key.json, encrypted with a key derived from the password.
 // The repo never holds the password or a readable token. tools/set-password.mjs writes the file.
-const REPO = { owner: "MergaertR", name: "dakloosheid-syllabus", branch: "main", path: "content/syllabus.docx" };
+const REPO = { owner: "MergaertR", name: "dakloosheid-syllabus", branch: "main" };
+const PAGES = {
+  syllabus: { name: "syllabus", path: "content/syllabus.docx", initial: "content/syllabus-initial.docx", url: "index.html", file: "syllabus-sociaal-beleid-ruben-mergaert" },
+  onderzoek: { name: "onderzoek", path: "content/onderzoek.docx", initial: "content/onderzoek-initial.docx", url: "onderzoek.html", file: "onderzoeksdossier-dakloosheid-brugge" },
+};
+let page = PAGES.syllabus;
 
 const $ = (id) => document.getElementById(id);
 const fromB64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
@@ -25,7 +30,7 @@ async function unlockToken(password) {
 }
 
 async function github(token, method, body) {
-  const url = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${REPO.path}`;
+  const url = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/${page.path}`;
   return fetch(method === "GET" ? `${url}?ref=${REPO.branch}` : url, {
     method,
     headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json" },
@@ -35,6 +40,21 @@ async function github(token, method, body) {
 
 let token = null;
 let fileBytes = null;
+
+function choosePage(key) {
+  page = PAGES[key];
+  const link = $("download-current");
+  link.href = page.path;
+  link.download = page.file + ".docx";
+  fileBytes = null;
+  $("preview").hidden = true;
+  $("status").hidden = true;
+  $("publish").disabled = true;
+  $("download-page").disabled = true;
+  for (const id of ["publish-msg", "reset-msg"]) $(id).textContent = "";
+  disarmReset();
+}
+document.querySelectorAll('input[name="page"]').forEach((r) => r.addEventListener("change", () => choosePage(r.value)));
 
 $("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -63,7 +83,7 @@ async function loadFile(file) {
   }
   const buffer = await file.arrayBuffer();
   const main = $("syllabus");
-  const result = await renderSyllabus(buffer.slice(0), main);
+  const result = await renderDocx(buffer.slice(0), main);
   buildToc(main, $("toc-list"));
   $("preview").hidden = false;
   fileBytes = new Uint8Array(buffer);
@@ -89,7 +109,7 @@ drop.addEventListener("drop", (e) => {
   if (e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
 });
 
-$("download-page").addEventListener("click", () => downloadStandalone($("syllabus"), $("toc-list")));
+$("download-page").addEventListener("click", () => downloadStandalone($("syllabus"), $("toc-list"), page.file + ".html"));
 
 async function publish(bytes, commitMessage) {
   const current = await github(token, "GET");
@@ -99,7 +119,6 @@ async function publish(bytes, commitMessage) {
   if (!res.ok) throw new Error(`GitHub antwoordde ${res.status}: ${(await res.json()).message}`);
 }
 
-const PUBLISHED = 'Gepubliceerd. Over 1 à 2 minuten staat de nieuwe versie op <a href="index.html">de syllabuspagina</a>.';
 
 async function run(btn, msg, busyText, task) {
   btn.disabled = true;
@@ -108,7 +127,7 @@ async function run(btn, msg, busyText, task) {
   try {
     await task();
     msg.className = "msg ok";
-    msg.innerHTML = PUBLISHED;
+    msg.innerHTML = `Gepubliceerd. Over 1 à 2 minuten staat de nieuwe versie op <a href="${page.url}">de pagina ${page.name}</a>.`;
   } catch (err) {
     console.error("[admin] mislukt", err);
     msg.className = "msg error";
@@ -119,32 +138,35 @@ async function run(btn, msg, busyText, task) {
 }
 
 $("publish").addEventListener("click", () =>
-  run($("publish"), $("publish-msg"), "Bezig met publiceren...", () => publish(fileBytes, "Update syllabus")));
+  run($("publish"), $("publish-msg"), "Bezig met publiceren...", () => publish(fileBytes, `Update ${page.name}`)));
 
 // Reset takes 2 clicks: the 1st saves a backup of the live version, the 2nd overwrites it.
 const resetBtn = $("reset");
 let resetArmed = false;
+function disarmReset() {
+  resetArmed = false;
+  resetBtn.textContent = "Zet terug naar eerste versie";
+}
 resetBtn.addEventListener("click", async () => {
   const msg = $("reset-msg");
   if (!resetArmed) {
-    const res = await fetch("content/syllabus.docx?v=" + Date.now(), { cache: "no-store" });
+    const res = await fetch(page.path + "?v=" + Date.now(), { cache: "no-store" });
     if (!res.ok) {
       msg.className = "msg error";
       msg.textContent = "De huidige versie kon niet downloaden. Er gebeurde niets.";
       return;
     }
-    saveBlob(await res.blob(), `syllabus-backup-${new Date().toISOString().slice(0, 10)}.docx`);
+    saveBlob(await res.blob(), `${page.name}-backup-${new Date().toISOString().slice(0, 10)}.docx`);
     resetArmed = true;
     resetBtn.textContent = "Back-up gedownload. Klik nogmaals om terug te zetten";
     msg.className = "msg";
     msg.textContent = "Controleer of de back-up in je Downloads staat.";
     return;
   }
-  resetArmed = false;
-  resetBtn.textContent = "Zet terug naar eerste versie";
+  disarmReset();
   await run(resetBtn, msg, "Bezig met terugzetten...", async () => {
-    const res = await fetch("content/syllabus-initial.docx", { cache: "no-store" });
+    const res = await fetch(page.initial, { cache: "no-store" });
     if (!res.ok) throw new Error("De eerste versie is niet gevonden");
-    await publish(new Uint8Array(await res.arrayBuffer()), "Reset syllabus to initial version");
+    await publish(new Uint8Array(await res.arrayBuffer()), `Reset ${page.name} to initial version`);
   });
 });

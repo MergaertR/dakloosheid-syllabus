@@ -15,7 +15,30 @@ const STYLE_MAP = [
   "p[style-name='Check'] => p.check:fresh",
   "p[style-name='Citaat'] => blockquote > p:fresh",
   "p[style-name='Citaatbron'] => blockquote > cite:fresh",
+  "p[style-name='Uitklapper'] => p.fold-open:fresh",
+  "p[style-name='Uitklapper dicht'] => p.fold-closed:fresh",
+  "p[style-name='Uitklapper einde'] => p.end-mark:fresh",
 ];
+
+// A collapsible runs from its "Uitklapper" title to the next "Uitklapper einde", the next
+// collapsible or the next chapter, whichever comes first.
+function buildFolds(container) {
+  for (const title of [...container.querySelectorAll(":scope > p.fold-open, :scope > p.fold-closed")]) {
+    const details = document.createElement("details");
+    details.open = title.classList.contains("fold-open");
+    const summary = document.createElement("summary");
+    summary.append(...title.childNodes);
+    details.append(summary);
+    title.replaceWith(details);
+    let next = details.nextSibling;
+    while (next && !next.matches?.("h2, p.fold-open, p.fold-closed")) {
+      const after = next.nextSibling;
+      details.append(next);
+      if (next.matches?.("p.end-mark")) break;
+      next = after;
+    }
+  }
+}
 
 function splitKey(el, keyClass, restClass, keyTag = "span") {
   const text = el.textContent;
@@ -35,7 +58,7 @@ function slug(text) {
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "deel";
 }
 
-async function renderSyllabus(arrayBuffer, main) {
+async function renderDocx(arrayBuffer, main) {
   const { value, messages } = await mammoth.convertToHtml({ arrayBuffer }, { styleMap: STYLE_MAP });
   const tmp = document.createElement("div");
   tmp.innerHTML = value;
@@ -47,6 +70,7 @@ async function renderSyllabus(arrayBuffer, main) {
   tmp.querySelectorAll("ol.chain > li").forEach((li) => splitKey(li, "lvl", "what"));
   tmp.querySelectorAll("ol.timeline > li").forEach((li) => splitKey(li, "year", "what"));
   tmp.querySelectorAll("table").forEach((t) => { if (!t.querySelector("thead")) t.classList.add("plain"); });
+  buildFolds(tmp);
 
   const sections = [];
   let current = null;
@@ -93,8 +117,26 @@ function saveBlob(blob, name) {
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
+// Public pages: load their Word file, render it and wire the buttons.
+async function bootPage(docxPath, htmlName) {
+  const main = document.getElementById("syllabus");
+  const toc = document.getElementById("toc-list");
+  try {
+    const res = await fetch(docxPath + "?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    await renderDocx(await res.arrayBuffer(), main);
+    buildToc(main, toc);
+    initToc();
+    if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+  } catch (err) {
+    console.error("[page] laden mislukt", err);
+    main.innerHTML = "<section><h2>Deze pagina kon niet laden</h2><p>Open de site via een webserver of GitHub Pages. Een lokaal geopend bestand mag het Word-bestand niet inlezen.</p></section>";
+  }
+  document.getElementById("download-page").addEventListener("click", () => downloadStandalone(main, toc, htmlName));
+}
+
 // 1 self-contained file without scripts, checks or site navigation: this is what Ruben submits.
-async function downloadStandalone(main, toc) {
+async function downloadStandalone(main, toc, fileName) {
   const css = await (await fetch("style.css")).text();
   const body = main.cloneNode(true);
   body.querySelectorAll(".check").forEach((el) => el.remove());
@@ -116,5 +158,5 @@ ${body.outerHTML}
 </div>
 </body>
 </html>`;
-  saveBlob(new Blob([html], { type: "text/html" }), "syllabus-sociaal-beleid-ruben-mergaert.html");
+  saveBlob(new Blob([html], { type: "text/html" }), fileName);
 }

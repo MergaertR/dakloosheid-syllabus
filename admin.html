@@ -37,8 +37,12 @@
 
 <section id="workspace" class="card" hidden>
   <h2>Nieuwe versie publiceren</h2>
+  <div class="segmented" role="radiogroup" aria-label="Welke pagina?">
+    <label><input type="radio" name="page" value="syllabus" checked><span>Syllabus</span></label>
+    <label><input type="radio" name="page" value="onderzoek"><span>Onderzoek</span></label>
+  </div>
   <ol class="steps">
-    <li><a href="content/syllabus.docx" download="syllabus-sociaal-beleid-ruben-mergaert.docx">Download de huidige Word-versie</a> en pas ze aan in Word.</li>
+    <li><a id="download-current" href="content/syllabus.docx" download>Download de huidige Word-versie</a> en pas ze aan in Word.</li>
     <li>Sleep je aangepaste bestand hieronder. Je ziet meteen hoe de site eruit zal zien.</li>
     <li>Klik op <strong>Publiceer</strong>. Na 1 à 2 minuten staat de nieuwe versie online.</li>
   </ol>
@@ -56,7 +60,7 @@
 
   <div class="reset">
     <h3>Terug naar de eerste versie</h3>
-    <p>Zet de syllabus terug naar de eerste versie. De site downloadt eerst de huidige versie als back-up, zodat je niets verliest.</p>
+    <p>Zet de gekozen pagina terug naar de eerste versie. De site downloadt eerst de huidige versie als back-up, zodat je niets verliest.</p>
     <button id="reset" type="button" class="danger">Zet terug naar eerste versie</button>
     <p id="reset-msg" class="msg"></p>
   </div>
@@ -73,6 +77,9 @@
         <tr><td>Keten</td><td>Stap in de keten van beleidsniveaus. Schrijf "niveau: uitleg".</td></tr>
         <tr><td>Check</td><td>Geel controlepunt voor jezelf. Verwijder alle checks voor je indient.</td></tr>
         <tr><td>Citaat, Citaatbron</td><td>Citaat met de naam van de spreker eronder.</td></tr>
+        <tr><td>Uitklapper, Uitklapper dicht</td><td>Titel van een blok dat je kan open- en dichtklappen. "Uitklapper dicht" start dicht.</td></tr>
+        <tr><td>Uitklapper einde</td><td>Sluit het uitklapblok af, bijvoorbeeld "Einde VN".</td></tr>
+        <tr><td>Keten, Tijdlijn</td><td>Schrijf "label: uitleg", bijvoorbeeld "2014: Samenwerkingsakkoord".</td></tr>
       </tbody>
     </table>
   </details>

@@ -39,23 +39,6 @@
 <script src="vendor/mammoth.js"></script>
 <script src="app.js"></script>
 <script src="render.js"></script>
-<script>
-  (async () => {
-    const main = document.getElementById("syllabus");
-    const toc = document.getElementById("toc-list");
-    try {
-      const res = await fetch("content/syllabus.docx?v=" + Date.now(), { cache: "no-store" });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      await renderSyllabus(await res.arrayBuffer(), main);
-      buildToc(main, toc);
-      initToc();
-      if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
-    } catch (err) {
-      console.error("[syllabus] laden mislukt", err);
-      main.innerHTML = "<section><h2>De syllabus kon niet laden</h2><p>Open de site via een webserver of GitHub Pages. Een lokaal geopend bestand mag het Word-bestand niet inlezen.</p></section>";
-    }
-    document.getElementById("download-page").addEventListener("click", () => downloadStandalone(main, toc));
-  })();
-</script>
+<script>bootPage("content/syllabus.docx", "syllabus-sociaal-beleid-ruben-mergaert.html");</script>
 </body>
 </html>

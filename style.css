@@ -276,3 +276,9 @@ button.danger { border-color: var(--warn); color: var(--warn); }
 button.danger:hover { background: var(--warn-soft); }
 .styles-help td:first-child { width: 30%; }
 #preview { padding: 0; margin-top: 1rem; border-top: 3px solid var(--accent); padding-top: 2rem; }
+
+.segmented { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; padding: 3px; background: var(--bg); margin-bottom: .8rem; }
+.segmented input { position: absolute; opacity: 0; pointer-events: none; }
+.segmented span { display: block; padding: .35rem 1rem; border-radius: 7px; cursor: pointer; font-weight: 600; color: var(--muted); }
+.segmented input:checked + span { background: var(--accent); color: var(--accent-ink); }
+.segmented input:focus-visible + span { outline: 2px solid var(--ink); }
