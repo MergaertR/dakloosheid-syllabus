@@ -40,6 +40,109 @@ function buildFolds(container) {
   }
 }
 
+// mammoth drops direct formatting. Before converting, the formatting we keep (text color,
+// background, alignment) gets rewritten into marker character styles that mammoth passes on
+// as span classes; restoreWordFormatting() turns those back into inline styles.
+// Font family and font size are left out on purpose, so the site keeps its own typography.
+const W = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+const HIGHLIGHTS = {
+  yellow: "FFFF00", green: "00FF00", cyan: "00FFFF", magenta: "FF00FF", blue: "0000FF", red: "FF0000",
+  darkBlue: "000080", darkCyan: "008080", darkGreen: "008000", darkMagenta: "800080", darkRed: "800000",
+  darkYellow: "808000", darkGray: "808080", lightGray: "C0C0C0",
+};
+const ALIGN = { center: "center", right: "right", end: "right" };
+
+const wAttr = (el, name) => el?.getAttributeNS(W, name) ?? el?.getAttribute("w:" + name);
+const wChild = (el, name) => el && [...el.children].find((c) => c.localName === name);
+const isHex = (v) => /^[0-9A-Fa-f]{6}$/.test(v || "");
+// Near-black text would vanish in dark mode and only repeats the default ink color.
+const isInk = (hex) => [0, 2, 4].every((i) => parseInt(hex.slice(i, i + 2), 16) < 0x40);
+
+function wEl(doc, name, val) {
+  const el = doc.createElementNS(W, "w:" + name);
+  if (val !== undefined) el.setAttributeNS(W, "w:val", val);
+  return el;
+}
+
+async function prepareWordFormatting(arrayBuffer) {
+  const zip = await JSZip.loadAsync(arrayBuffer);
+  const docFile = zip.file("word/document.xml");
+  const stylesFile = zip.file("word/styles.xml");
+  if (!docFile || !stylesFile) return { buffer: arrayBuffer, styleMap: [] };
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(await docFile.async("string"), "application/xml");
+  const styles = parser.parseFromString(await stylesFile.async("string"), "application/xml");
+  const markers = new Set();
+
+  for (const run of doc.getElementsByTagNameNS(W, "r")) {
+    const rPr = wChild(run, "rPr");
+    if (!rPr || wChild(rPr, "rStyle")) continue;
+    const color = wAttr(wChild(rPr, "color"), "val");
+    const highlight = HIGHLIGHTS[wAttr(wChild(rPr, "highlight"), "val")];
+    const shading = wAttr(wChild(rPr, "shd"), "fill");
+    const bg = highlight || (isHex(shading) && shading.toUpperCase() !== "FFFFFF" ? shading : null);
+    const parts = [];
+    if (isHex(color) && !isInk(color)) parts.push("c-" + color.toUpperCase());
+    if (bg) parts.push("bg-" + bg.toUpperCase());
+    if (!parts.length) continue;
+    const id = "fx-" + parts.join("-");
+    rPr.insertBefore(wEl(doc, "rStyle", id), rPr.firstChild);
+    markers.add(id);
+  }
+
+  for (const p of doc.getElementsByTagNameNS(W, "p")) {
+    const pPr = wChild(p, "pPr");
+    const align = ALIGN[wAttr(wChild(pPr, "jc"), "val")];
+    if (!align) continue;
+    const id = "fx-align-" + align;
+    const run = wEl(doc, "r");
+    const rPr = wEl(doc, "rPr");
+    rPr.append(wEl(doc, "rStyle", id));
+    const t = wEl(doc, "t");
+    t.textContent = "​";
+    run.append(rPr, t);
+    p.insertBefore(run, pPr ? pPr.nextSibling : p.firstChild);
+    markers.add(id);
+  }
+
+  if (!markers.size) return { buffer: arrayBuffer, styleMap: [] };
+  const root = styles.documentElement;
+  for (const id of markers) {
+    const style = wEl(styles, "style");
+    style.setAttributeNS(W, "w:type", "character");
+    style.setAttributeNS(W, "w:styleId", id);
+    style.append(wEl(styles, "name", id));
+    root.append(style);
+  }
+  const xml = new XMLSerializer();
+  zip.file("word/document.xml", xml.serializeToString(doc));
+  zip.file("word/styles.xml", xml.serializeToString(styles));
+  return {
+    buffer: await zip.generateAsync({ type: "arraybuffer" }),
+    styleMap: [...markers].map((id) => `r[style-name='${id}'] => span.${id}`),
+  };
+}
+
+function restoreWordFormatting(container) {
+  container.querySelectorAll("span[class^='fx-align-']").forEach((marker) => {
+    const block = marker.closest("p, li, h1, h2, h3, h4, td, th");
+    if (block) block.style.textAlign = marker.className.slice("fx-align-".length);
+    marker.remove();
+  });
+  container.querySelectorAll("span[class^='fx-']").forEach((span) => {
+    const color = span.className.match(/c-([0-9A-F]{6})/)?.[1];
+    const bg = span.className.match(/bg-([0-9A-F]{6})/)?.[1];
+    if (color) span.style.color = "#" + color;
+    if (bg) {
+      span.style.backgroundColor = "#" + bg;
+      if (!color) span.style.color = "#1d1b18";
+      span.style.borderRadius = "3px";
+      span.style.padding = "0 .15em";
+    }
+    span.removeAttribute("class");
+  });
+}
+
 function splitKey(el, keyClass, restClass, keyTag = "span") {
   const text = el.textContent;
   const i = text.indexOf(":");
@@ -59,11 +162,16 @@ function slug(text) {
 }
 
 async function renderDocx(arrayBuffer, main) {
-  const { value, messages } = await mammoth.convertToHtml({ arrayBuffer }, { styleMap: STYLE_MAP });
+  const prepared = await prepareWordFormatting(arrayBuffer);
+  const { value, messages } = await mammoth.convertToHtml(
+    { arrayBuffer: prepared.buffer },
+    { styleMap: [...STYLE_MAP, "u => u", ...prepared.styleMap] },
+  );
   const tmp = document.createElement("div");
   tmp.innerHTML = value;
 
   tmp.querySelectorAll("td > p:only-child, th > p:only-child").forEach((p) => p.replaceWith(...p.childNodes));
+  restoreWordFormatting(tmp);
   tmp.querySelectorAll("p").forEach((p) => { if (!p.textContent.trim()) p.remove(); });
   tmp.querySelectorAll(".note-warn").forEach((d) => { d.className = "note warn"; });
   tmp.querySelectorAll("p.stat").forEach((p) => splitKey(p, "num", "lbl"));
