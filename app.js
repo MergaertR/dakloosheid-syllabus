@@ -22,13 +22,3 @@ function initToc() {
 }
 if (document.querySelector("main section[id]")) initToc();
 
-const checkBtn = document.getElementById("check-toggle");
-if (checkBtn) {
-  const applyChecks = (hidden) => {
-    document.body.classList.toggle("hide-checks", hidden);
-    checkBtn.textContent = hidden ? "Toon checks" : "Verberg checks";
-    localStorage.setItem("syllabus-hide-checks", hidden ? "1" : "");
-  };
-  applyChecks(localStorage.getItem("syllabus-hide-checks") === "1");
-  checkBtn.addEventListener("click", () => applyChecks(!document.body.classList.contains("hide-checks")));
-}
