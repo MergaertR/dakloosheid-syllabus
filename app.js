@@ -19,6 +19,17 @@ const observer = new IntersectionObserver((entries) => {
 }, { rootMargin: "-30% 0px -60% 0px" });
 document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s));
 
+const checkBtn = document.getElementById("check-toggle");
+if (checkBtn) {
+  const applyChecks = (hidden) => {
+    document.body.classList.toggle("hide-checks", hidden);
+    checkBtn.textContent = hidden ? "Toon checks" : "Verberg checks";
+    localStorage.setItem("syllabus-hide-checks", hidden ? "1" : "");
+  };
+  applyChecks(localStorage.getItem("syllabus-hide-checks") === "1");
+  checkBtn.addEventListener("click", () => applyChecks(!document.body.classList.contains("hide-checks")));
+}
+
 // Builds the Word file from the live page, so the website and the .docx never drift apart.
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell,
@@ -38,6 +49,7 @@ function inlineRuns(node, fmt = {}) {
       const text = clean(child.textContent);
       if (text.trim() || text === " ") runs.push(new TextRun({ text, ...fmt }));
     } else if (child.nodeType === Node.ELEMENT_NODE) {
+      if (child.classList.contains("check")) continue;
       const tag = child.tagName;
       if (tag === "STRONG" || tag === "B") runs.push(...inlineRuns(child, { ...fmt, bold: true }));
       else if (tag === "EM" || tag === "I" || tag === "CITE") runs.push(...inlineRuns(child, { ...fmt, italics: true }));
@@ -90,7 +102,8 @@ function note(el) {
 function convert(el) {
   const tag = el.tagName;
   const cls = el.classList;
-  if (cls.contains("end-mark")) return [];
+  // Checks are notes for Ruben while editing; they must never reach the submitted document.
+  if (cls.contains("end-mark") || cls.contains("check")) return [];
   if (tag === "H1") return [new Paragraph({ heading: HeadingLevel.TITLE, children: inlineRuns(el) })];
   if (tag === "H2") return [new Paragraph({ heading: HeadingLevel.HEADING_1, children: inlineRuns(el), spacing: { before: 360, after: 160 } })];
   if (tag === "H3") return [new Paragraph({ heading: HeadingLevel.HEADING_3, children: inlineRuns(el), spacing: { before: 240, after: 100 } })];
@@ -159,7 +172,7 @@ async function exportDocx() {
     const blob = await Packer.toBlob(doc);
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "onderzoeksdossier-dakloosheid-brugge.docx";
+    a.download = document.getElementById("syllabus").dataset.docxName;
     a.click();
     URL.revokeObjectURL(a.href);
   } catch (err) {
